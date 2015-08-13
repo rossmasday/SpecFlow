@@ -4,6 +4,6 @@ namespace TechTalk.SpecFlow.Infrastructure
 {
     public interface IDefaultDependencyProvider
     {
-        void RegisterDefaults(ObjectContainer container);
+        void RegisterDefaults(IObjectContainer container);
     }
 }

@@ -9,7 +9,7 @@ namespace TechTalk.SpecFlow.Infrastructure
 {
     partial class DefaultDependencyProvider
     {
-        partial void RegisterUnitTestProviders(ObjectContainer container)
+        partial void RegisterUnitTestProviders(IObjectContainer container)
         {
             container.RegisterTypeAs<NUnitRuntimeProvider, IUnitTestRuntimeProvider>("nunit");
             container.RegisterTypeAs<MbUnitRuntimeProvider, IUnitTestRuntimeProvider>("mbunit");

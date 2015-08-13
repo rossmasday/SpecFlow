@@ -99,7 +99,7 @@ namespace TechTalk.SpecFlow.RuntimeTests.Infrastructure
                 this.pluginToReturn = pluginToReturn;
             }
 
-            public override void RegisterDefaults(BoDi.ObjectContainer container)
+            public override void RegisterDefaults(IObjectContainer container)
             {
                 base.RegisterDefaults(container);
 

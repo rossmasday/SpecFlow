@@ -61,7 +61,7 @@ namespace TechTalk.SpecFlow.Infrastructure
             return container;
         }
 
-        protected virtual IRuntimePlugin[] LoadPlugins(IRuntimeConfigurationProvider configurationProvider, ObjectContainer container)
+        protected virtual IRuntimePlugin[] LoadPlugins(IRuntimeConfigurationProvider configurationProvider, IObjectContainer container)
         {
             var plugins = container.Resolve<IDictionary<string, IRuntimePlugin>>().Values.AsEnumerable();
 
@@ -76,7 +76,7 @@ namespace TechTalk.SpecFlow.Infrastructure
             return pluginLoader.LoadPlugin(pluginDescriptor);
         }
 
-        protected virtual void RegisterDefaults(ObjectContainer container)
+        protected virtual void RegisterDefaults(IObjectContainer container)
         {
             defaultDependencyProvider.RegisterDefaults(container);
         }

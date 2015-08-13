@@ -10,9 +10,9 @@ namespace TechTalk.SpecFlow.Infrastructure
 {
     public partial class DefaultDependencyProvider : IDefaultDependencyProvider
     {
-        partial void RegisterUnitTestProviders(ObjectContainer container);
+        partial void RegisterUnitTestProviders(IObjectContainer container);
 
-        public virtual void RegisterDefaults(ObjectContainer container)
+        public virtual void RegisterDefaults(IObjectContainer container)
         {
             container.RegisterTypeAs<DefaultRuntimeConfigurationProvider, IRuntimeConfigurationProvider>();
 
