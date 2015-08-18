@@ -47,8 +47,10 @@ namespace TechTalk.SpecFlow
 
         internal ScenarioContext(ScenarioInfo scenarioInfo, ITestRunner testRunner, IObjectContainer parentContainer)
         {
-            this.objectContainer = parentContainer == null ? new ObjectContainer() : 
-                pluginContainer ?? new ObjectContainer(parentContainer);
+            this.objectContainer = parentContainer == null
+                ? new ObjectContainer()
+                : pluginContainer ?? new ObjectContainer();
+
             TestRunner = testRunner;
 
             Stopwatch = new Stopwatch();

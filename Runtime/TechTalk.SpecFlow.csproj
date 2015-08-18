@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -170,6 +171,7 @@
     <Compile Include="Infrastructure\RuntimePluginAttribute.cs" />
     <Compile Include="Infrastructure\StepDefinitionMatchService.cs" />
     <Compile Include="Infrastructure\TestRunnerFactory.cs" />
+    <Compile Include="IPluginContainer.cs" />
     <Compile Include="PlatformCompatibility\CultureInfoHelper.cs" />
     <Compile Include="PlatformCompatibility\EnumHelper.cs" />
     <Compile Include="PlatformCompatibility\ExceptionHelper.cs" />
