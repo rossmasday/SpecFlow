@@ -5,8 +5,8 @@ namespace TechTalk.SpecFlow.Generator.Plugins
 {
     public interface IGeneratorPlugin
     {
-        void RegisterDependencies(ObjectContainer container);
-        void RegisterCustomizations(ObjectContainer container, SpecFlowProjectConfiguration generatorConfiguration);
+        void RegisterDependencies(IObjectContainer container);
+        void RegisterCustomizations(IObjectContainer container, SpecFlowProjectConfiguration generatorConfiguration);
         void RegisterConfigurationDefaults(SpecFlowProjectConfiguration specFlowConfiguration);
     }
 }

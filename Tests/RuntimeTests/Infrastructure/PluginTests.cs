@@ -17,12 +17,12 @@ namespace TechTalk.SpecFlow.RuntimeTests.Infrastructure
     {
         public class PluginWithCustomDependency : IRuntimePlugin
         {
-            public void RegisterDependencies(ObjectContainer container)
+            public void RegisterDependencies(IObjectContainer container)
             {
                 container.RegisterTypeAs<CustomDependency, ICustomDependency>();
             }
 
-            public void RegisterCustomizations(ObjectContainer container, RuntimeConfiguration runtimeConfiguration)
+            public void RegisterCustomizations(IObjectContainer container, RuntimeConfiguration runtimeConfiguration)
             {
                 
             }
@@ -34,11 +34,11 @@ namespace TechTalk.SpecFlow.RuntimeTests.Infrastructure
 
         public class PluginWithCustomTestRunnerFactoryWhenStopAtFirstErrorIsTrue : IRuntimePlugin
         {
-            public void RegisterDependencies(ObjectContainer container)
+            public void RegisterDependencies(IObjectContainer container)
             {
             }
 
-            public void RegisterCustomizations(ObjectContainer container, RuntimeConfiguration runtimeConfiguration)
+            public void RegisterCustomizations(IObjectContainer container, RuntimeConfiguration runtimeConfiguration)
             {
                 if (runtimeConfiguration.StopAtFirstError)
                     container.RegisterTypeAs<CustomTestRunnerFactory, ITestRunnerFactory>();
@@ -58,11 +58,11 @@ namespace TechTalk.SpecFlow.RuntimeTests.Infrastructure
                 this.specifyDefaults = specifyDefaults;
             }
 
-            public void RegisterDependencies(ObjectContainer container)
+            public void RegisterDependencies(IObjectContainer container)
             {
             }
 
-            public void RegisterCustomizations(ObjectContainer container, RuntimeConfiguration runtimeConfiguration)
+            public void RegisterCustomizations(IObjectContainer container, RuntimeConfiguration runtimeConfiguration)
             {
             }
 

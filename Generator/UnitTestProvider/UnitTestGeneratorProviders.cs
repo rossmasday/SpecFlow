@@ -9,7 +9,7 @@ namespace TechTalk.SpecFlow.Generator
 {
     partial class DefaultDependencyProvider
     {
-        partial void RegisterUnitTestGeneratorProviders(ObjectContainer container)
+        partial void RegisterUnitTestGeneratorProviders(IObjectContainer container)
         {
             container.RegisterTypeAs<NUnitTestGeneratorProvider, IUnitTestGeneratorProvider>("nunit");
             container.RegisterTypeAs<MbUnitTestGeneratorProvider, IUnitTestGeneratorProvider>("mbunit");

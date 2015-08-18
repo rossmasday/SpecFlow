@@ -9,9 +9,9 @@ namespace TechTalk.SpecFlow.Generator
 {
     internal partial class DefaultDependencyProvider
     {
-        partial void RegisterUnitTestGeneratorProviders(ObjectContainer container);
+        partial void RegisterUnitTestGeneratorProviders(IObjectContainer container);
 
-        public virtual void RegisterDefaults(ObjectContainer container)
+        public virtual void RegisterDefaults(IObjectContainer container)
         {
             container.RegisterTypeAs<GeneratorConfigurationProvider, IGeneratorConfigurationProvider>();
             container.RegisterTypeAs<InProcGeneratorInfoProvider, IGeneratorInfoProvider>();

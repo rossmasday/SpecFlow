@@ -55,7 +55,7 @@ namespace TechTalk.SpecFlow.Generator
             return container;
         }
 
-        private static IGeneratorPlugin[] LoadPlugins(ObjectContainer container, IGeneratorConfigurationProvider configurationProvider, SpecFlowConfigurationHolder configurationHolder)
+        private static IGeneratorPlugin[] LoadPlugins(IObjectContainer container, IGeneratorConfigurationProvider configurationProvider, SpecFlowConfigurationHolder configurationHolder)
         {
             var plugins = container.Resolve<IDictionary<string, IGeneratorPlugin>>().Values.AsEnumerable();
 
@@ -70,7 +70,7 @@ namespace TechTalk.SpecFlow.Generator
             return pluginLoader.LoadPlugin(pluginDescriptor);
         }
 
-        private static void RegisterDefaults(ObjectContainer container)
+        private static void RegisterDefaults(IObjectContainer container)
         {
             DefaultDependencyProvider.RegisterDefaults(container);
         }
