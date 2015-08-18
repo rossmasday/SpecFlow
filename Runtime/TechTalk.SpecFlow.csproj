@@ -156,6 +156,7 @@
     <Compile Include="Bindings\StepDefinitionKeyword.cs" />
     <Compile Include="Bindings\MethodBinding.cs" />
     <Compile Include="Bindings\StepDefinitionRegexCalculator.cs" />
+    <Compile Include="Composer.cs" />
     <Compile Include="Configuration\DefaultRuntimeConfigurationProvider.cs" />
     <Compile Include="Configuration\IRuntimeConfigurationProvider.cs" />
     <Compile Include="Infrastructure\DefaultDependencyProvider.cs" />

@@ -47,6 +47,9 @@ namespace TechTalk.SpecFlow
 
         internal ScenarioContext(ScenarioInfo scenarioInfo, ITestRunner testRunner, IObjectContainer parentContainer)
         {
+            var composer = new Composer();
+            composer.Compose(this);
+
             this.objectContainer = parentContainer == null
                 ? new ObjectContainer()
                 : pluginContainer ?? new ObjectContainer();
