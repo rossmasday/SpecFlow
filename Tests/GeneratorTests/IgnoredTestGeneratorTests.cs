@@ -6,6 +6,7 @@ using System.Text;
 using BoDi;
 using Moq;
 using NUnit.Framework;
+using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Generator;
 using TechTalk.SpecFlow.Generator.Interfaces;
 using TechTalk.SpecFlow.Generator.UnitTestConverter;

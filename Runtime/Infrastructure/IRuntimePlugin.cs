@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BoDi;
+using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Configuration;
 
 namespace TechTalk.SpecFlow.Infrastructure

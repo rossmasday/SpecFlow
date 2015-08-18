@@ -1,4 +1,5 @@
 using BoDi;
+using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Generator.Configuration;
 
 namespace TechTalk.SpecFlow.Generator.Plugins

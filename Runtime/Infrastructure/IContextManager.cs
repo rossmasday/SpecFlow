@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using BoDi;
+using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Bindings;
 using TechTalk.SpecFlow.Tracing;
 

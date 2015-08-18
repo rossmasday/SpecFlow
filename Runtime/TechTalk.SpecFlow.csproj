@@ -172,7 +172,6 @@
     <Compile Include="Infrastructure\RuntimePluginAttribute.cs" />
     <Compile Include="Infrastructure\StepDefinitionMatchService.cs" />
     <Compile Include="Infrastructure\TestRunnerFactory.cs" />
-    <Compile Include="IPluginContainer.cs" />
     <Compile Include="PlatformCompatibility\CultureInfoHelper.cs" />
     <Compile Include="PlatformCompatibility\EnumHelper.cs" />
     <Compile Include="PlatformCompatibility\ExceptionHelper.cs" />
@@ -244,6 +243,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BindingSkeletons\DefaultSkeletonTemplates.sftemplate" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechTalk.Specflow.Extensions\TechTalk.Specflow.Extensions.csproj">
+      <Project>{f7d960d3-b621-4919-93eb-03ce03783c15}</Project>
+      <Name>TechTalk.Specflow.Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

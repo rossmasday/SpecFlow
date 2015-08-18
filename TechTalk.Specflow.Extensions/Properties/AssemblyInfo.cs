@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TechTalk.SpecFlow.IntegrationTests")]
+[assembly: AssemblyTitle("TechTalk.Specflow.Extensions")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("TechTalk.SpecFlow.IntegrationTests")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCompany("Reed Business Information")]
+[assembly: AssemblyProduct("TechTalk.Specflow.Extensions")]
+[assembly: AssemblyCopyright("Copyright © Reed Business Information 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: System.Security.SecurityRules(System.Security.SecurityRuleSet.Level1)]
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("941bfc80-a07c-431b-a0b0-a6a78f3af34f")]
+[assembly: Guid("5ed5db49-2594-4abf-b179-143ed26cfed1")]
 
 // Version information for an assembly consists of the following four values:
 //

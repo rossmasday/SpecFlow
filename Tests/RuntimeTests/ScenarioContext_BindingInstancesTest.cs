@@ -5,6 +5,7 @@ using System.Text;
 using BoDi;
 using NUnit.Framework;
 using FluentAssertions;
+using TechTalk.Specflow.Extensions;
 
 namespace TechTalk.SpecFlow.RuntimeTests
 {

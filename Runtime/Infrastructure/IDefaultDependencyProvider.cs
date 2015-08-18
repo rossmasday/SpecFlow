@@ -1,4 +1,5 @@
 ﻿using BoDi;
+using TechTalk.Specflow.Extensions;
 
 namespace TechTalk.SpecFlow.Infrastructure
 {

@@ -1,4 +1,5 @@
 ﻿using BoDi;
+using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.BindingSkeletons;
 using TechTalk.SpecFlow.Bindings;
 using TechTalk.SpecFlow.Bindings.Discovery;

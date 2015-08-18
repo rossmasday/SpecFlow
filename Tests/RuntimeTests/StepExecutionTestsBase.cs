@@ -5,6 +5,7 @@ using System.Reflection;
 using BoDi;
 using Moq;
 using NUnit.Framework;
+using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Bindings;
 using TechTalk.SpecFlow.Bindings.Discovery;
 using TechTalk.SpecFlow.Bindings.Reflection;

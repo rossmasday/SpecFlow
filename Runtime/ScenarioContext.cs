@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using BoDi;
+using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Bindings;
 using TechTalk.SpecFlow.Infrastructure;
 
