@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using BoDi;
@@ -37,13 +38,17 @@ namespace TechTalk.SpecFlow
         internal List<StepInstance> MissingSteps { get; private set; }
         internal Stopwatch Stopwatch { get; private set; }
 
-        internal ITestRunner TestRunner { get; private set; } 
+        internal ITestRunner TestRunner { get; private set; }
+
+        [Import(typeof (IPluginContainer), AllowDefault = true)]
+        private IObjectContainer pluginContainer;
 
         private readonly IObjectContainer objectContainer;
 
         internal ScenarioContext(ScenarioInfo scenarioInfo, ITestRunner testRunner, IObjectContainer parentContainer)
         {
-            this.objectContainer = parentContainer == null ? new ObjectContainer() : new ObjectContainer(parentContainer);
+            this.objectContainer = parentContainer == null ? new ObjectContainer() : 
+                pluginContainer ?? new ObjectContainer(parentContainer);
             TestRunner = testRunner;
 
             Stopwatch = new Stopwatch();
