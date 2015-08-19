@@ -75,8 +75,6 @@ namespace TechTalk.SpecFlow
 
         public object GetBindingInstance(Type bindingType)
         {
-            //TODO This is special just for scenario context because it needs to add to plugin not base
-            //return  objectContainer.ResolveNew(bindingType);
             return objectContainer.Resolve(bindingType);
         }
 
