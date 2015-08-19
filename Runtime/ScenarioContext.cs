@@ -41,7 +41,7 @@ namespace TechTalk.SpecFlow
 
         internal ITestRunner TestRunner { get; private set; }
 
-        [Import(typeof (IPluginContainer))]
+        [Import(typeof (IPluginContainer), AllowDefault = true)]
         private IObjectContainer pluginContainer;
 
         private readonly IObjectContainer objectContainer;

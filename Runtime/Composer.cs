@@ -30,6 +30,12 @@ namespace TechTalk.SpecFlow
             {
                 this.container.ComposeParts(instance);
             }
+            //catch (CompositionException ex)
+            //{
+            //    //TODO loggin?
+            //    throw;
+            //}
+            //TODO Debug code needs to be removed later
             catch (Exception ex)
             {
                 var loaderException = ex as ReflectionTypeLoadException;
