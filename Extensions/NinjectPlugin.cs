@@ -1,6 +1,10 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Linq;
+using System.Reflection;
 using Ninject;
+using Ninject.Activation.Blocks;
+using Ninject.Activation.Caching;
 using TechTalk.SpecFlow.BoDi;
 
 namespace TechTalk.Specflow.Extensions
@@ -11,12 +15,14 @@ namespace TechTalk.Specflow.Extensions
         internal class SpecFlowStandardKernel : StandardKernel, IObjectContainer
         {
             private readonly IObjectContainer baseContainer;
+            private readonly ActivationBlock activationBlock;
 
             [ImportingConstructor]
             public SpecFlowStandardKernel(IObjectContainer objectContainer)
             {
                 this.baseContainer = objectContainer;
                 this.Bind<IObjectContainer>().ToConstant(this);
+                activationBlock = new ActivationBlock(this);
             }
 
             public void RegisterTypeAs<TType, TInterface>(string name = null) where TType : class, TInterface
@@ -49,10 +55,9 @@ namespace TechTalk.Specflow.Extensions
                 return this.baseContainer.Resolve(typeToResolve, name);
             }
 
-            public override void Dispose(bool disposing)
+            void IDisposable.Dispose()
             {
-                baseContainer.Dispose();
-                base.Dispose(disposing);
+                this.activationBlock.Dispose();
             }
         }
     }

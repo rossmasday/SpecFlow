@@ -4,6 +4,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using TechTalk.SpecFlow.BoDi;
 
 namespace TechTalk.SpecFlow
 {
@@ -24,15 +25,17 @@ namespace TechTalk.SpecFlow
             defaultCatalog.SourceProvider = container;
         }
 
-        public CompositionContainer Compose<TInstance>(TInstance instance)
+        public CompositionContainer Compose<TInstance>(TInstance instance, IObjectContainer objectContainer)
         {
             try
             {
+                container.ComposeExportedValue(objectContainer);
                 this.container.ComposeParts(instance);
+                
             }
             //catch (CompositionException ex)
             //{
-            //    //TODO loggin?
+            //    //TODO logging?
             //    throw;
             //}
             //TODO Debug code needs to be removed later

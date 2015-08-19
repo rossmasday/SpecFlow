@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using BoDi;
 using TechTalk.SpecFlow.Bindings;
 using TechTalk.SpecFlow.BoDi;
@@ -49,11 +50,11 @@ namespace TechTalk.SpecFlow
         internal ScenarioContext(ScenarioInfo scenarioInfo, ITestRunner testRunner, IObjectContainer parentContainer)
         {
             var composer = new Composer();
-            composer.Compose(this);
+            composer.Compose(this, parentContainer);
 
             this.objectContainer = parentContainer == null
                 ? new ObjectContainer()
-                : pluginContainer ?? new ObjectContainer();
+                : pluginContainer ?? new ObjectContainer(parentContainer);
 
             TestRunner = testRunner;
 
@@ -74,6 +75,8 @@ namespace TechTalk.SpecFlow
 
         public object GetBindingInstance(Type bindingType)
         {
+            //TODO This is special just for scenario context because it needs to add to plugin not base
+            //return  objectContainer.ResolveNew(bindingType);
             return objectContainer.Resolve(bindingType);
         }
 
@@ -85,7 +88,8 @@ namespace TechTalk.SpecFlow
         protected override void Dispose()
         {
             base.Dispose();
-
+            //TODO this does not work with plugin containers because this calls all items in the container and executes dispose on them
+            //this is nonstandard IOC behaviour i cannot mimick
             objectContainer.Dispose();
         }
     }
