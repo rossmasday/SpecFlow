@@ -7,7 +7,7 @@ using BoDi;
 using Moq;
 using NUnit.Framework;
 using FluentAssertions;
-using TechTalk.Specflow.Extensions;
+using TechTalk.SpecFlow.BoDi;
 using TechTalk.SpecFlow.Configuration;
 using TechTalk.SpecFlow.Infrastructure;
 

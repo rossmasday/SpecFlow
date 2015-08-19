@@ -3,8 +3,8 @@ using BoDi;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Bindings;
+using TechTalk.SpecFlow.BoDi;
 using TechTalk.SpecFlow.Infrastructure;
 using TechTalk.SpecFlow.Tracing;
 

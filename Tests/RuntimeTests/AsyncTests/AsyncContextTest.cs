@@ -1,8 +1,8 @@
 using System;
 using BoDi;
 using NUnit.Framework;
-using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Async;
+using TechTalk.SpecFlow.BoDi;
 
 namespace TechTalk.SpecFlow.RuntimeTests.AsyncTests
 {

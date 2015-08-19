@@ -20,10 +20,11 @@ using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Serialization;
-using TechTalk.Specflow.Extensions;
+using TechTalk.SpecFlow.BoDi;
 
 namespace BoDi
 {
@@ -58,6 +59,7 @@ namespace BoDi
         IObjectContainer Container { get; }
     }
 
+    [Export(typeof(IObjectContainer))]
     public class ObjectContainer : IObjectContainer
     {
         private const string REGISTERED_NAME_PARAMETER_NAME = "registeredName";

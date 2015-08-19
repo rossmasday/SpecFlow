@@ -56,7 +56,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CB927B
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.Specflow.Extensions", "TechTalk.Specflow.Extensions\TechTalk.Specflow.Extensions.csproj", "{F7D960D3-B621-4919-93EB-03CE03783C15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalk.Specflow.Extensions", "Extensions\TechTalk.Specflow.Extensions.csproj", "{F7D960D3-B621-4919-93EB-03CE03783C15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

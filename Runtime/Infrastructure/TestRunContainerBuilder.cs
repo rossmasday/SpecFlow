@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BoDi;
 using System.Linq;
-using TechTalk.Specflow.Extensions;
+using TechTalk.SpecFlow.BoDi;
 using TechTalk.SpecFlow.Configuration;
 using TechTalk.SpecFlow.UnitTestProvider;
 

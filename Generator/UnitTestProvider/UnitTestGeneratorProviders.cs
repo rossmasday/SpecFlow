@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BoDi;
-using TechTalk.Specflow.Extensions;
+using TechTalk.SpecFlow.BoDi;
 using TechTalk.SpecFlow.Generator.UnitTestProvider;
 
 namespace TechTalk.SpecFlow.Generator

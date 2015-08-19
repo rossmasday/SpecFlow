@@ -3,7 +3,7 @@ using System.Reflection;
 using BoDi;
 using TechTalk.SpecFlow.Configuration;
 using System.Linq;
-using TechTalk.Specflow.Extensions;
+using TechTalk.SpecFlow.BoDi;
 
 namespace TechTalk.SpecFlow.Infrastructure
 {

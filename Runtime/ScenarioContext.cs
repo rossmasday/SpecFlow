@@ -4,8 +4,8 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
 using BoDi;
-using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.Bindings;
+using TechTalk.SpecFlow.BoDi;
 using TechTalk.SpecFlow.Infrastructure;
 
 #if SILVERLIGHT
@@ -41,7 +41,7 @@ namespace TechTalk.SpecFlow
 
         internal ITestRunner TestRunner { get; private set; }
 
-        [Import(typeof (IPluginContainer), AllowDefault = true)]
+        [Import(typeof (IPluginContainer))]
         private IObjectContainer pluginContainer;
 
         private readonly IObjectContainer objectContainer;

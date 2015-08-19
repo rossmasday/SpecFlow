@@ -1,8 +1,8 @@
 ﻿using BoDi;
-using TechTalk.Specflow.Extensions;
 using TechTalk.SpecFlow.BindingSkeletons;
 using TechTalk.SpecFlow.Bindings;
 using TechTalk.SpecFlow.Bindings.Discovery;
+using TechTalk.SpecFlow.BoDi;
 using TechTalk.SpecFlow.Configuration;
 using TechTalk.SpecFlow.ErrorHandling;
 using TechTalk.SpecFlow.Tracing;

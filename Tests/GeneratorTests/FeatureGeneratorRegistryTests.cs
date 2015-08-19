@@ -4,7 +4,7 @@ using BoDi;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using TechTalk.Specflow.Extensions;
+using TechTalk.SpecFlow.BoDi;
 using TechTalk.SpecFlow.Generator;
 using TechTalk.SpecFlow.Generator.Interfaces;
 using TechTalk.SpecFlow.Generator.UnitTestConverter;

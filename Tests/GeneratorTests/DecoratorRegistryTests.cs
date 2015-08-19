@@ -9,7 +9,7 @@ using TechTalk.SpecFlow.Generator;
 using TechTalk.SpecFlow.Generator.UnitTestConverter;
 using TechTalk.SpecFlow.Parser.SyntaxElements;
 using FluentAssertions;
-using TechTalk.Specflow.Extensions;
+using TechTalk.SpecFlow.BoDi;
 
 namespace TechTalk.SpecFlow.GeneratorTests
 {
