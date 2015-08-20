@@ -158,6 +158,7 @@
     <Compile Include="Bindings\StepDefinitionRegexCalculator.cs" />
     <Compile Include="BoDi\IObjectContainer.cs" />
     <Compile Include="BoDi\IPluginContainer.cs" />
+    <Compile Include="BoDi\IScenarioContextContainer.cs" />
     <Compile Include="Composer.cs" />
     <Compile Include="Configuration\DefaultRuntimeConfigurationProvider.cs" />
     <Compile Include="Configuration\IRuntimeConfigurationProvider.cs" />

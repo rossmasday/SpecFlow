@@ -58,6 +58,7 @@ namespace TechTalk.Specflow.Extensions
             void IDisposable.Dispose()
             {
                 this.activationBlock.Dispose();
+                ((IScenarioContextContainer)baseContainer).DisposeScenarioContext();
             }
         }
     }

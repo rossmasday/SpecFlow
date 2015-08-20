@@ -75,12 +75,12 @@ namespace TechTalk.SpecFlow
 
         public object GetBindingInstance(Type bindingType)
         {
-            return objectContainer.Resolve(bindingType);
+            return objectContainer.Resolve(bindingType, typeof(IScenarioContextContainer).Name);
         }
 
         internal void SetBindingInstance(Type bindingType, object instance)
         {
-            objectContainer.RegisterInstanceAs(instance, bindingType);
+            objectContainer.RegisterInstanceAs(instance, bindingType, typeof(IScenarioContextContainer).Name);
         }
 
         protected override void Dispose()
