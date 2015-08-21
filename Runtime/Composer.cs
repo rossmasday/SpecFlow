@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using BoDi;
 using TechTalk.SpecFlow.BoDi;
 
 namespace TechTalk.SpecFlow
@@ -14,9 +14,10 @@ namespace TechTalk.SpecFlow
 
         public Composer()
         {
+            //TODO this stirng needs a proper place, for now it's just for POC
             const string extensionsDirectory = @"C:\Extensions";
 
-            var defaultCatalog = new CatalogExportProvider(new AssemblyCatalog(typeof(TestRunnerManager).Assembly));
+            var defaultCatalog = new CatalogExportProvider(new AssemblyCatalog(typeof(ObjectContainer).Assembly));
 
             container = Directory.Exists(extensionsDirectory)
                 ? new CompositionContainer(new DirectoryCatalog(extensionsDirectory), defaultCatalog)
