@@ -33,20 +33,10 @@ namespace TechTalk.SpecFlow
                 this.container.ComposeParts(instance);
                 
             }
-            //catch (CompositionException ex)
-            //{
-            //    //TODO logging?
-            //    throw;
-            //}
-            //TODO Debug code needs to be removed later
-            catch (Exception ex)
+            catch (CompositionException ex)
             {
-                var loaderException = ex as ReflectionTypeLoadException;
-                if (loaderException == null)
-                    throw;
-
-                var info = String.Join("\r\n", loaderException.LoaderExceptions.Select(x => x.Message));
-                throw new Exception(info);
+                //TODO logging?
+                throw;
             }
             return container;
         }
