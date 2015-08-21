@@ -60,7 +60,7 @@ namespace BoDi
     }
 
     [Export(typeof(IObjectContainer))]
-    public class ObjectContainer : IObjectContainer, IScenarioContextContainer
+    public class ObjectContainer : IObjectContainer
     {
         private const string REGISTERED_NAME_PARAMETER_NAME = "registeredName";
 
@@ -479,23 +479,6 @@ namespace BoDi
             objectPool.Clear();
             registrations.Clear();
             resolvedObjects.Clear();
-        }
-
-        public void DisposeScenarioContext()
-        {
-            var scenarioItems = objectPool
-                .Where(o => !string.IsNullOrWhiteSpace(o.Key.Name))
-                .Where(o => o.Key.Name.Equals(typeof(IScenarioContextContainer).Name))
-                .ToDictionary(x => x.Key, x => x.Value);
-
-            DisposeObjects(scenarioItems);
-
-            foreach (var scenarioItem in scenarioItems)
-            {
-                objectPool.Remove(scenarioItem.Key);
-                registrations.Remove(scenarioItem.Key);
-                resolvedObjects.Remove(scenarioItem.Key);
-            }
         }
 
         private void DisposeObjects(IDictionary<RegistrationKey, object> objects)

@@ -50,7 +50,7 @@ namespace TechTalk.SpecFlow
         internal ScenarioContext(ScenarioInfo scenarioInfo, ITestRunner testRunner, IObjectContainer parentContainer)
         {
             var composer = new Composer();
-            composer.Compose(this, parentContainer);
+            composer.Compose(this, new ObjectContainer(parentContainer));
 
             this.objectContainer = parentContainer == null
                 ? new ObjectContainer()
@@ -75,19 +75,17 @@ namespace TechTalk.SpecFlow
 
         public object GetBindingInstance(Type bindingType)
         {
-            return objectContainer.Resolve(bindingType, typeof(IScenarioContextContainer).Name);
+            return objectContainer.Resolve(bindingType);
         }
 
         internal void SetBindingInstance(Type bindingType, object instance)
         {
-            objectContainer.RegisterInstanceAs(instance, bindingType, typeof(IScenarioContextContainer).Name);
+            objectContainer.RegisterInstanceAs(instance, bindingType);
         }
 
         protected override void Dispose()
         {
             base.Dispose();
-            //TODO this does not work with plugin containers because this calls all items in the container and executes dispose on them
-            //this is nonstandard IOC behaviour i cannot mimick
             objectContainer.Dispose();
         }
     }
