@@ -16,22 +16,18 @@ namespace TechTalk.Specflow.Extensions
         internal class SpecFlowStandardKernel : StandardKernel, IObjectContainer
         {
             private readonly SpecFlowStandardKernel baseContainer;
-            //private readonly ActivationBlock activationBlock;
-            private readonly NamedScope namedScope;
+            private readonly ActivationBlock activationBlock;
 
             public SpecFlowStandardKernel()
             {
                 this.Rebind<IObjectContainer>().ToConstant(this);
-                namedScope = this.CreateNamedScope("Test");
-                //activationBlock = new ActivationBlock(this);
+                activationBlock = new ActivationBlock(this);
             }
 
             public SpecFlowStandardKernel(IObjectContainer objectContainer)
             {
-                
-                namedScope = this.CreateNamedScope("Test");
                 this.baseContainer = (SpecFlowStandardKernel)objectContainer;
-                //activationBlock = new ActivationBlock(this);
+                activationBlock = new ActivationBlock(this);
             }
 
             public void RegisterTypeAs<TType, TInterface>(string name = null) where TType : class, TInterface
@@ -109,10 +105,8 @@ namespace TechTalk.Specflow.Extensions
 
             void IDisposable.Dispose()
             {
-                namedScope.Dispose();
-               // if (activationBlock != null)
-                //this.activationBlock.Dispose();
-                base.Dispose();
+                if (activationBlock != null)
+                    this.activationBlock.Dispose();
             }
         }
     }
