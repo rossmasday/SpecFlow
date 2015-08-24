@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using BoDi;
 using Moq;
@@ -17,11 +18,19 @@ namespace TechTalk.SpecFlow.GeneratorTests
     public class DecoratorRegistryTests
     {
         private IObjectContainer container;
-        
+
+        [Import(typeof (IPluginContainerFactory), AllowDefault = true)]
+        private IPluginContainerFactory pluginContainerFactory;
+
         [SetUp]
         public void Setup()
         {
-            container = new ObjectContainer();
+            var composer = new Composer();
+            composer.Compose(this);
+
+            container = pluginContainerFactory == null
+                ? new ObjectContainer()
+                : pluginContainerFactory.CreateContainer();
         }
 
         internal static Mock<ITestClassTagDecorator> CreateTestClassTagDecoratorMock(string expectedTag = null)

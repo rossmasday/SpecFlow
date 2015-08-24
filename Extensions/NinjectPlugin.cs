@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reflection;
@@ -95,6 +96,19 @@ namespace TechTalk.Specflow.Extensions
                 return this.baseContainer == null
                     ? this.Get<T>(name.ToLower())
                     : this.baseContainer.Get<T>(name.ToLower());
+            }
+
+            //TODO RA do we need base container access?
+            public IDictionary<string, T> ResolveAll<T>()
+            {
+                var names = this.GetBindings(typeof (T)).Select(x => x.Metadata).ToList();
+                var instances = this.GetAll<T>().ToList();
+                if (names.Count == 0 || instances.Count == 0)
+                    throw new ArgumentException(typeof(T).ToString());
+
+                return names
+                    .Zip(instances, (m, i) => new {Meta = m.Name, Instance = i})
+                    .ToDictionary(x => x.Meta, x => x.Instance);
             }
 
             //This is primarily used by scenario context, it has more logic than the other because it needs to work as it always has

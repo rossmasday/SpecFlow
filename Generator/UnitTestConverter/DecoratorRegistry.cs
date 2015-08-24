@@ -96,12 +96,16 @@ namespace TechTalk.SpecFlow.Generator.UnitTestConverter
 
         private List<ITestMethodDecorator> ResolveDecorators<TDecorator>(IObjectContainer objectContainer, Func<TDecorator, ITestMethodDecorator> selector)
         {
-            return objectContainer.Resolve<IDictionary<string, TDecorator>>().Select(item => selector(item.Value)).OrderBy(d => d.Priority).ToList();
+            //TODO RA Had to change this so that other containers could work, is this ok?
+            return objectContainer.ResolveAll<TDecorator>().Select(item => selector(item.Value)).OrderBy(d => d.Priority).ToList();
+            //return objectContainer.Resolve<IDictionary<string, TDecorator>>().Select(item => selector(item.Value)).OrderBy(d => d.Priority).ToList();
         }
 
         private List<ITestMethodTagDecorator> ResolveTagDecorators<TDecorator>(IObjectContainer objectContainer, Func<TDecorator, ITestMethodTagDecorator> selector)
         {
-            return objectContainer.Resolve<IDictionary<string, TDecorator>>().Select(item => selector(item.Value)).OrderBy(d => d.Priority).ToList();
+            //TODO RA Had to change this so that other containers could work, is this ok?
+            return objectContainer.ResolveAll<TDecorator>().Select(item => selector(item.Value)).OrderBy(d => d.Priority).ToList();
+            //return objectContainer.Resolve<IDictionary<string, TDecorator>>().Select(item => selector(item.Value)).OrderBy(d => d.Priority).ToList();
         }
 
         public void DecorateTestClass(TestClassGenerationContext generationContext, out List<string> unprocessedTags)

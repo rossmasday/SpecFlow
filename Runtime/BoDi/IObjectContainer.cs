@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BoDi;
 
 namespace TechTalk.SpecFlow.BoDi
@@ -66,6 +67,9 @@ namespace TechTalk.SpecFlow.BoDi
         /// </remarks>
         T Resolve<T>(string name);
 
+        //TODO RA added this because need interface to have the ability to build dictionaries too
+        IDictionary<string, T> ResolveAll<T>();
+
         /// <summary>
         /// Resolves an implementation object for an interface or type.
         /// </summary>
@@ -77,6 +81,7 @@ namespace TechTalk.SpecFlow.BoDi
         /// </remarks>
         object Resolve(Type typeToResolve, string name = null);
 
+        //TODO RA added this because need interface to have the ability to resolve these as ScenarioContext uses this
         void RegisterTypeAs(Type implementationType, Type interfaceType, string s);
     }
 }

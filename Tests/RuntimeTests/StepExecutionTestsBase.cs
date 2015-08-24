@@ -90,7 +90,7 @@ namespace TechTalk.SpecFlow.RuntimeTests
             return new CultureInfo("en-US");
         }
 
-        [Import(typeof (IPluginContainerFactory))]
+        [Import(typeof (IPluginContainerFactory), AllowDefault = true)]
         private IPluginContainerFactory pluginContainerFactory;
 
         [SetUp]

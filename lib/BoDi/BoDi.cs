@@ -336,6 +336,12 @@ namespace BoDi
             return (T)resolvedObject;
         }
 
+        //TODO RA added this because need interface to have the ability to build dictionaries too
+        public IDictionary<string, T> ResolveAll<T>()
+        {
+            return Resolve<IDictionary<string, T>>();
+        }
+
         public object Resolve(Type typeToResolve, string name = null)
         {
             return Resolve(typeToResolve, Enumerable.Empty<Type>(), name);
