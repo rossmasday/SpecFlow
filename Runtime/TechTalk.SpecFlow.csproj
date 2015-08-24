@@ -157,9 +157,7 @@
     <Compile Include="Bindings\MethodBinding.cs" />
     <Compile Include="Bindings\StepDefinitionRegexCalculator.cs" />
     <Compile Include="BoDi\IObjectContainer.cs" />
-    <Compile Include="BoDi\IPluginContainer.cs" />
     <Compile Include="BoDi\IPluginContainerFactory.cs" />
-    <Compile Include="BoDi\Load.cs" />
     <Compile Include="BoDi\RegisterConfiguration.cs" />
     <Compile Include="Composer.cs" />
     <Compile Include="Configuration\DefaultRuntimeConfigurationProvider.cs" />

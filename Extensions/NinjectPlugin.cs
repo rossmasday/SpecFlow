@@ -12,7 +12,14 @@ namespace TechTalk.Specflow.Extensions
 {
     class NinjectPlugin
     {
-        //[Export(typeof(IPluginContainer))]
+        //TODO RA Setup notes for final build structure
+        //This ninject plugin goes in an external assembly probably TechTalk.SpecFlow.Extensions.NinjectPlugin
+        //That new assemby will be in its own repo and have a ref to TechTalk.SpecFlow.Extensions
+        //This assembly TechTalk.SpecFlow.Extensions will have only the following two files in it
+        //IObjectContainer & IPluginContainerFactory
+        //Need to find a way to get specflow to ref this assembly
+        //Then this assembly will be located in separate repo
+        //This assembly may be used for other plugins
         internal class SpecFlowStandardKernel : StandardKernel, IObjectContainer
         {
             private readonly SpecFlowStandardKernel baseContainer;
@@ -20,8 +27,8 @@ namespace TechTalk.Specflow.Extensions
 
             public SpecFlowStandardKernel()
             {
-                this.Rebind<IObjectContainer>().ToConstant(this);
                 activationBlock = new ActivationBlock(this);
+                this.Rebind<IObjectContainer>().ToConstant(this);
             }
 
             public SpecFlowStandardKernel(IObjectContainer objectContainer)
@@ -54,7 +61,7 @@ namespace TechTalk.Specflow.Extensions
             {
                 if (string.IsNullOrWhiteSpace(name))
                 {
-                    this.Rebind(interfaceType).ToConstant(instance);
+                    this.Rebind(interfaceType).ToConstant(instance).InSingletonScope();
                     return;
                 }
                 this.Bind(interfaceType).ToConstant(instance).Named(name.ToLower());
@@ -90,21 +97,35 @@ namespace TechTalk.Specflow.Extensions
                     : this.baseContainer.Get<T>(name.ToLower());
             }
 
+            //This is primarily used by scenario context, it has more logic than the other because it needs to work as it always has
             public object Resolve(Type typeToResolve, string name = null)
             {
+                object tInstance;
                 if (string.IsNullOrWhiteSpace(name))
                 {
-                    return this.baseContainer == null
-                        ? this.Get(typeToResolve)
-                        : this.baseContainer.Get(typeToResolve);
+                    tInstance = this.TryGet(typeToResolve);
+                    if (tInstance != null)
+                    {
+                        Rebind(typeToResolve).ToConstant(tInstance).InSingletonScope();
+                        return tInstance;
+                    }
+                    tInstance = this.baseContainer.TryGet(typeToResolve);
+                    //This will cause a fail, neither class could resolve it, the Ninject fail will be more meaningful
+                    if (tInstance == null) 
+                        return this.Get(typeToResolve);
+
+                    this.baseContainer.Rebind(typeToResolve).ToConstant(tInstance).InSingletonScope();
+                    return tInstance;
                 }
-                return this.baseContainer == null
-                    ? this.Get(typeToResolve, name.ToLower())
-                    : this.baseContainer.Get(typeToResolve, name.ToLower());
+                //TODO this needs the base container logic as above, but for now we're ok
+                tInstance = this.TryGet(typeToResolve, name.ToLower());
+                Rebind(typeToResolve).ToConstant(tInstance).InSingletonScope().Named(name.ToLower());
+                return tInstance;
             }
 
             void IDisposable.Dispose()
             {
+                //TODO this should displose my objects but isnt
                 if (activationBlock != null)
                     this.activationBlock.Dispose();
             }

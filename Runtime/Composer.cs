@@ -14,7 +14,7 @@ namespace TechTalk.SpecFlow
 
         public Composer()
         {
-            //TODO this stirng needs a proper place, for now it's just for POC
+            //TODO RA this string needs a proper place, for now it's just for POC
             const string extensionsDirectory = @"C:\Extensions";
 
             var defaultCatalog = new CatalogExportProvider(new AssemblyCatalog(typeof(ObjectContainer).Assembly));
@@ -30,7 +30,7 @@ namespace TechTalk.SpecFlow
         {
             return Compose(instance, null);
         }
-
+        //TODO RA This will probably be removed
         public CompositionContainer Compose<TInstance>(TInstance instance, IObjectContainer objectContainer)
         {
             try
@@ -42,7 +42,7 @@ namespace TechTalk.SpecFlow
             }
             catch (CompositionException ex)
             {
-                //TODO logging?
+                //TODO RA logging?
                 throw;
             }
             return container;
