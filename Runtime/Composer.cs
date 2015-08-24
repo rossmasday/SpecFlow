@@ -26,11 +26,17 @@ namespace TechTalk.SpecFlow
             defaultCatalog.SourceProvider = container;
         }
 
+        public CompositionContainer Compose<TInstance>(TInstance instance)
+        {
+            return Compose(instance, null);
+        }
+
         public CompositionContainer Compose<TInstance>(TInstance instance, IObjectContainer objectContainer)
         {
             try
             {
-                container.ComposeExportedValue(objectContainer);
+                if (objectContainer != null)
+                    container.ComposeExportedValue(objectContainer);
                 this.container.ComposeParts(instance);
                 
             }

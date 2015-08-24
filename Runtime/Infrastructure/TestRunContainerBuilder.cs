@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using BoDi;
 using System.Linq;
 using TechTalk.SpecFlow.BoDi;
@@ -15,6 +16,9 @@ namespace TechTalk.SpecFlow.Infrastructure
 
     public class TestRunContainerBuilder : ITestRunContainerBuilder
     {
+        [Import(typeof (IPluginContainerFactory), AllowDefault = true)]
+        private IPluginContainerFactory objectContainerFactory;
+
         public static IDefaultDependencyProvider DefaultDependencyProvider = new DefaultDependencyProvider();
 
         private readonly IDefaultDependencyProvider defaultDependencyProvider;
@@ -26,7 +30,12 @@ namespace TechTalk.SpecFlow.Infrastructure
 
         public virtual IObjectContainer CreateContainer(IRuntimeConfigurationProvider configurationProvider = null)
         {
-            var container = new ObjectContainer();
+            var composer = new Composer();
+            composer.Compose(this);
+
+            var container = objectContainerFactory == null
+                ? new ObjectContainer()
+                : objectContainerFactory.CreateContainer();
 
             RegisterDefaults(container);
 
@@ -48,7 +57,10 @@ namespace TechTalk.SpecFlow.Infrastructure
 
 #if !BODI_LIMITEDRUNTIME
             if (runtimeConfiguration.CustomDependencies != null)
-                container.RegisterFromConfiguration(runtimeConfiguration.CustomDependencies);
+            {
+                var registerConfiguration = new RegisterConfiguration(container);
+                registerConfiguration.RegisterFromConfiguration(runtimeConfiguration.CustomDependencies);
+            }              
 #endif
 
             container.RegisterInstanceAs(runtimeConfiguration);
@@ -64,6 +76,7 @@ namespace TechTalk.SpecFlow.Infrastructure
 
         protected virtual IRuntimePlugin[] LoadPlugins(IRuntimeConfigurationProvider configurationProvider, IObjectContainer container)
         {
+            //TODO RA: at no point in any of the tests does this return any more than an empty dictionary therefore i am creating this Default dependencyProvider
             var plugins = container.Resolve<IDictionary<string, IRuntimePlugin>>().Values.AsEnumerable();
 
             var pluginLoader = container.Resolve<IRuntimePluginLoader>();

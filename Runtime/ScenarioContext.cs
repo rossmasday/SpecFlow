@@ -42,19 +42,28 @@ namespace TechTalk.SpecFlow
 
         internal ITestRunner TestRunner { get; private set; }
 
-        [Import(typeof (IPluginContainer), AllowDefault = true)]
-        private IObjectContainer pluginContainer;
+        [Import(typeof(IPluginContainerFactory), AllowDefault = true)]
+        private IPluginContainerFactory objectContainerFactory;
 
         private readonly IObjectContainer objectContainer;
 
         internal ScenarioContext(ScenarioInfo scenarioInfo, ITestRunner testRunner, IObjectContainer parentContainer)
         {
             var composer = new Composer();
-            composer.Compose(this, new ObjectContainer(parentContainer));
+            composer.Compose(this);
 
-            this.objectContainer = parentContainer == null
-                ? new ObjectContainer()
-                : pluginContainer ?? new ObjectContainer(parentContainer);
+            if (objectContainerFactory == null)
+            {
+                objectContainer = parentContainer == null 
+                    ? new ObjectContainer() 
+                    : new ObjectContainer(parentContainer);
+            }
+            else
+            {
+                objectContainer = parentContainer == null
+                    ? objectContainerFactory.CreateContainer()
+                    : objectContainerFactory.CreateContainer(parentContainer);
+            }
 
             TestRunner = testRunner;
 

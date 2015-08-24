@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Reflection;
+using System.Xml.Serialization;
 using BoDi;
 using Moq;
 using NUnit.Framework;
@@ -86,12 +88,18 @@ namespace TechTalk.SpecFlow.RuntimeTests
         protected virtual CultureInfo GetBindingCulture()
         {
             return new CultureInfo("en-US");
-        }        
+        }
+
+        [Import(typeof (IPluginContainerFactory))]
+        private IPluginContainerFactory pluginContainerFactory;
 
         [SetUp]
         public virtual void SetUp()
         {
             TestRunnerManager.Reset();
+
+            var composer = new Composer();
+            composer.Compose(this);
 
             MockRepository = new MockRepository();
 
@@ -99,7 +107,10 @@ namespace TechTalk.SpecFlow.RuntimeTests
             FeatureLanguage = GetFeatureLanguage();
             CultureInfo bindingCulture = GetBindingCulture();
 
-            var container = new ObjectContainer();
+            var container = pluginContainerFactory == null
+                ? new ObjectContainer()
+                : pluginContainerFactory.CreateContainer();
+
             container.RegisterInstanceAs(new Mock<ITestRunner>().Object);
             ContextManagerStub = new ContextManager(MockRepository.Stub<ITestTracer>(), container);
             ContextManagerStub.InitializeFeatureContext(new FeatureInfo(FeatureLanguage, "test feature", null), bindingCulture);

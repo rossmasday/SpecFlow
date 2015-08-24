@@ -250,7 +250,7 @@ namespace BoDi
             }
         }
 
-        private void RegisterTypeAs(Type implementationType, Type interfaceType, string name)
+        public void RegisterTypeAs(Type implementationType, Type interfaceType, string name)
         {
             var registrationKey = new RegistrationKey(interfaceType, name);
             AssertNotResolved(registrationKey);
@@ -355,6 +355,12 @@ namespace BoDi
             Debug.Assert(typeToResolve.IsInstanceOfType(resolvedObject));
             return resolvedObject;
         }
+
+        //public IEnumerable<T> DisposeObjects<T>(IDictionary<RegistrationKey, object> objects)
+        //{
+        //    foreach (var obj in objects.Values.OfType<IDisposable>().Where(o => !ReferenceEquals(o, this)))
+        //        obj.Dispose();
+        //}
 
         private IRegistration GetRegistrationResult(RegistrationKey keyToResolve)
         {

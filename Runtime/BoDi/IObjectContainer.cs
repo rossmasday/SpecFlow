@@ -76,5 +76,7 @@ namespace TechTalk.SpecFlow.BoDi
         ///     <para>The container pools the objects, so if the interface is resolved twice or the same type is registered for multiple interfaces, a single instance is created and returned.</para>
         /// </remarks>
         object Resolve(Type typeToResolve, string name = null);
+
+        void RegisterTypeAs(Type implementationType, Type interfaceType, string s);
     }
 }

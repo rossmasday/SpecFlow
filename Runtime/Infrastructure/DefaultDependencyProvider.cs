@@ -1,4 +1,5 @@
-﻿using BoDi;
+﻿using System.Collections.Generic;
+using BoDi;
 using TechTalk.SpecFlow.BindingSkeletons;
 using TechTalk.SpecFlow.Bindings;
 using TechTalk.SpecFlow.Bindings.Discovery;
@@ -19,6 +20,7 @@ namespace TechTalk.SpecFlow.Infrastructure
 
             container.RegisterTypeAs<TestRunnerFactory, ITestRunnerFactory>();
             container.RegisterTypeAs<TestRunner, ITestRunner>();
+
             container.RegisterTypeAs<TestExecutionEngine, ITestExecutionEngine>();
             container.RegisterTypeAs<StepDefinitionMatchService, IStepDefinitionMatchService>();
 
@@ -46,6 +48,12 @@ namespace TechTalk.SpecFlow.Infrastructure
 
             container.RegisterTypeAs<BindingAssemblyLoader, IBindingAssemblyLoader>();
 
+            //TODO RA Added this as seems safe and allows resolve later
+            container.RegisterInstanceAs(new Dictionary<string, IRuntimePlugin>(), typeof(IDictionary<string, IRuntimePlugin>));
+
+            //TODO RA Added this, might not be ok, couldnt find anywhere where these are added outside of unit tests
+            container.RegisterInstanceAs(new Dictionary<string, IStepErrorHandler>(), typeof(IDictionary<string, IStepErrorHandler>));
+            
             RegisterUnitTestProviders(container);
         }
     }

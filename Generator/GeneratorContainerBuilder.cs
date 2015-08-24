@@ -59,7 +59,7 @@ namespace TechTalk.SpecFlow.Generator
         private static IGeneratorPlugin[] LoadPlugins(IObjectContainer container, IGeneratorConfigurationProvider configurationProvider, SpecFlowConfigurationHolder configurationHolder)
         {
             var plugins = container.Resolve<IDictionary<string, IGeneratorPlugin>>().Values.AsEnumerable();
-
+            
             var pluginLoader = container.Resolve<IGeneratorPluginLoader>();
             plugins = plugins.Concat(configurationProvider.GetPlugins(configurationHolder).Where(pd => (pd.Type & PluginType.Generator) != 0).Select(pd => LoadPlugin(pluginLoader, pd)));
 
