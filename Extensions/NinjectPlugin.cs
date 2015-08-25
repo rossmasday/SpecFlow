@@ -4,9 +4,11 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reflection;
 using Ninject;
+using Ninject.Activation;
 using Ninject.Activation.Blocks;
 using Ninject.Activation.Caching;
 using Ninject.Extensions.NamedScope;
+using Ninject.Planning.Bindings;
 using TechTalk.SpecFlow.BoDi;
 
 namespace TechTalk.Specflow.Extensions
@@ -24,18 +26,15 @@ namespace TechTalk.Specflow.Extensions
         internal class SpecFlowStandardKernel : StandardKernel, IObjectContainer
         {
             private readonly SpecFlowStandardKernel baseContainer;
-            private readonly ActivationBlock activationBlock;
 
             public SpecFlowStandardKernel()
             {
-                activationBlock = new ActivationBlock(this);
                 this.Rebind<IObjectContainer>().ToConstant(this);
             }
 
             public SpecFlowStandardKernel(IObjectContainer objectContainer)
             {
                 this.baseContainer = (SpecFlowStandardKernel)objectContainer;
-                activationBlock = new ActivationBlock(this);
             }
 
             public void RegisterTypeAs<TType, TInterface>(string name = null) where TType : class, TInterface
@@ -52,10 +51,10 @@ namespace TechTalk.Specflow.Extensions
             {
                 if (string.IsNullOrWhiteSpace(name))
                 {
-                    this.Rebind<TInterface>().ToConstant(instance);
+                    this.Rebind<TInterface>().ToConstant(instance).InSingletonScope();
                     return;
                 }
-                this.Bind<TInterface>().ToConstant(instance).Named(name.ToLower());
+                this.Bind<TInterface>().ToConstant(instance).InSingletonScope().Named(name.ToLower());
             }
 
             public void RegisterInstanceAs(object instance, Type interfaceType, string name = null)
@@ -65,7 +64,7 @@ namespace TechTalk.Specflow.Extensions
                     this.Rebind(interfaceType).ToConstant(instance).InSingletonScope();
                     return;
                 }
-                this.Bind(interfaceType).ToConstant(instance).Named(name.ToLower());
+                this.Bind(interfaceType).ToConstant(instance).InSingletonScope().Named(name.ToLower());
             }
 
             public void RegisterTypeAs(Type implementationType, Type interfaceType, string name = null)
@@ -106,9 +105,6 @@ namespace TechTalk.Specflow.Extensions
                     .Select(x => x.Metadata.Name).ToList();
                 
                 var instances = this.GetAll<T>().ToList();
-                
-                if (names.Count == 0 || instances.Count == 0)
-                    throw new ArgumentException(typeof(T).ToString());
 
                 return names
                     .Zip(instances, (n, i) => new {Name = n, Instance = i})
@@ -125,7 +121,7 @@ namespace TechTalk.Specflow.Extensions
                     if (tInstance != null)
                     {
                         Rebind(typeToResolve).ToConstant(tInstance).InSingletonScope();
-                        return tInstance;
+                        return this.Get(typeToResolve);
                     }
                     tInstance = this.baseContainer.TryGet(typeToResolve);
                     //This will cause a fail, neither class could resolve it, the Ninject fail will be more meaningful
@@ -143,9 +139,7 @@ namespace TechTalk.Specflow.Extensions
 
             void IDisposable.Dispose()
             {
-                //TODO RA this should displose my objects but isnt
-                if (activationBlock != null)
-                    this.activationBlock.Dispose();
+                base.Components.Dispose();
             }
         }
     }

@@ -20,8 +20,6 @@ namespace TechTalk.SpecFlow.Infrastructure
             container.RegisterTypeAs<MsTestRuntimeProvider, IUnitTestRuntimeProvider>("mstest.2008");
             container.RegisterTypeAs<MsTest2010RuntimeProvider, IUnitTestRuntimeProvider>("mstest.2010");
             container.RegisterTypeAs<MsTest2010RuntimeProvider, IUnitTestRuntimeProvider>("mstest");
-
-            var t = container.Resolve<IUnitTestRuntimeProvider>("nunit");
         }
     }
 }
