@@ -101,14 +101,18 @@ namespace TechTalk.Specflow.Extensions
             //TODO RA do we need base container access?
             public IDictionary<string, T> ResolveAll<T>()
             {
-                var names = this.GetBindings(typeof (T)).Select(x => x.Metadata).ToList();
+                var names = this.GetBindings(typeof (T))
+                    .Where(x => !String.IsNullOrWhiteSpace(x.Metadata.Name))
+                    .Select(x => x.Metadata.Name).ToList();
+                
                 var instances = this.GetAll<T>().ToList();
+                
                 if (names.Count == 0 || instances.Count == 0)
                     throw new ArgumentException(typeof(T).ToString());
 
                 return names
-                    .Zip(instances, (m, i) => new {Meta = m.Name, Instance = i})
-                    .ToDictionary(x => x.Meta, x => x.Instance);
+                    .Zip(instances, (n, i) => new {Name = n, Instance = i})
+                    .ToDictionary(x => x.Name, x => x.Instance);
             }
 
             //This is primarily used by scenario context, it has more logic than the other because it needs to work as it always has
@@ -131,7 +135,7 @@ namespace TechTalk.Specflow.Extensions
                     this.baseContainer.Rebind(typeToResolve).ToConstant(tInstance).InSingletonScope();
                     return tInstance;
                 }
-                //TODO this needs the base container logic as above, but for now we're ok
+                //TODO RA this needs the base container logic as above, but for now we're ok
                 tInstance = this.TryGet(typeToResolve, name.ToLower());
                 Rebind(typeToResolve).ToConstant(tInstance).InSingletonScope().Named(name.ToLower());
                 return tInstance;
@@ -139,7 +143,7 @@ namespace TechTalk.Specflow.Extensions
 
             void IDisposable.Dispose()
             {
-                //TODO this should displose my objects but isnt
+                //TODO RA this should displose my objects but isnt
                 if (activationBlock != null)
                     this.activationBlock.Dispose();
             }
